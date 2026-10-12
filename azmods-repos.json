@@ -1,4 +1,6 @@
 {
   "azmods_repos": 1,
-  "repos": []
+  "repos": [
+    "https://github.com/Kyle-Hosman/az-flip-testmod"
+  ]
 }
