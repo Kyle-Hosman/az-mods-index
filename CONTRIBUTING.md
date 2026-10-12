@@ -71,3 +71,5 @@ back with questions or requested changes.
 - A repository can be removed at any time if a mod is found to break the guidelines,
   in particular anything that risks crashing a DJ's set or hides what it does.
 - To remove your own repository, open a pull request that deletes its line.
+
+Every mod id must be unique across the whole index (case does not matter); `tools/check.py` tells you if one clashes.

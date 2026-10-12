@@ -34,12 +34,6 @@ For each repository, a deck fetches
 that file, and of the packages it points to, is documented in the SDK's guide,
 [Packaging and publishing](https://github.com/Kyle-Hosman/az-mods-sdk/blob/main/docs/06-publishing.md).
 
-## Limits
-
-A deck reads the first 64 repositories on this list (the check refuses more), plus up to
-32 a DJ adds by hand. It shows each mod id once, so every id here is unique across all
-listed repositories, compared without regard to case.
-
 ## Checks
 
 Every pull request, every push to `main`, and a weekly run check that:
