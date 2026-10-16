@@ -34,20 +34,12 @@ jobs:
       - name: Check the list's schema and every listed repository's versions
         run: python3 tools/check.py azmods-repos.json --fetch
 
-      # The full check uses the SDK's azmod-pack. While the SDK repository is private, a
-      # workflow token cannot read it: the step is skipped with a notice instead of failing.
+      # The full check uses the SDK's azmod-pack, at the SDK release decks are built against.
       - uses: actions/checkout@v4
-        id: sdk
-        continue-on-error: true
         with:
           repository: Kyle-Hosman/az-mods-sdk
-          ref: main
+          ref: v1.2.3
           path: .azmod-sdk
 
       - name: Check every listed repository and package
-        if: steps.sdk.outcome == 'success'
         run: python3 .azmod-sdk/tools/azmod-pack list check azmods-repos.json --download
-
-      - name: Full check skipped
-        if: steps.sdk.outcome != 'success'
-        run: echo "::notice::The SDK could not be checked out (still private?), so only the schema was checked."

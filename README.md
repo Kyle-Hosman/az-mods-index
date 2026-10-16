@@ -1,4 +1,4 @@
-# AZ-MODS community index
+# AZ-MODS Mod Index
 
 The list of community mod repositories that every XDJ-AZ running AZ-MODS shows by
 default, under Mod Menu > Community Mods > Repositories.
