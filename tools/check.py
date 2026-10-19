@@ -7,6 +7,8 @@ SDK's azmod-pack is not available.
                                                         azmods-repo.json: each mod's
                                                         version and min_core, and that
                                                         no mod id is listed twice
+    python3 tools/check.py --stats stats.json           the download counts' schema
+                                                        (tools/stats.py writes the file)
 
 A deck compares versions as MAJOR.MINOR.PATCH, numbers only, each 0 to 9999: an update
 is offered only when the listed version is higher than the installed one, and anything
@@ -27,6 +29,9 @@ import urllib.request
 REPO_RE = re.compile(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9._-]+")
 VERSION_RE = re.compile(r"(0|[1-9]\d{0,3})\.(0|[1-9]\d{0,3})\.(0|[1-9]\d{0,3})")
 MAX_REPOS = 64   # the deck reads the first 64 listed repositories
+ID_RE = re.compile(r"[a-z0-9-]{3,32}")   # a mod id, as a deck accepts it
+GENERATED_RE = re.compile(r"\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\dZ")
+MAX_COUNT = 10 ** 12
 
 
 def check_list(d):
@@ -99,6 +104,36 @@ def check_ids(indexes):
     return errs, warns
 
 
+def check_stats(d):
+    """Problems with stats.json, as a list of strings: {"azmods_stats": 1, "generated":
+    "YYYY-MM-DDTHH:MMZ", "mods": {repository URL: {mod id: downloads}}}."""
+    if not isinstance(d, dict):
+        return ["the file must be a JSON object"]
+    errs = []
+    if d.get("azmods_stats") != 1:
+        errs.append('"azmods_stats" must be 1')
+    g = d.get("generated")
+    if not isinstance(g, str) or not GENERATED_RE.fullmatch(g):
+        errs.append(f'"generated" {g!r} is not YYYY-MM-DDTHH:MMZ')
+    mods = d.get("mods")
+    if not isinstance(mods, dict):
+        return errs + ['"mods" must be an object']
+    if len(mods) > MAX_REPOS:
+        errs.append(f"{len(mods)} repositories: the deck reads at most {MAX_REPOS}")
+    for repo, counts in mods.items():
+        if not REPO_RE.fullmatch(repo) or repo.endswith(".git"):
+            errs.append(f"not https://github.com/OWNER/REPO: {repo!r}")
+        if not isinstance(counts, dict):
+            errs.append(f"{repo}: the counts must be an object")
+            continue
+        for mid, n in counts.items():
+            if not ID_RE.fullmatch(mid):
+                errs.append(f"{repo}: {mid!r} is not a mod id")
+            if not isinstance(n, int) or isinstance(n, bool) or n < 0 or n > MAX_COUNT:
+                errs.append(f"{repo}: {mid}: {n!r} is not a download count")
+    return errs
+
+
 def raw_index_url(repo):
     return repo.replace("https://github.com/", "https://raw.githubusercontent.com/", 1) + "/HEAD/azmods-repo.json"
 
@@ -109,6 +144,12 @@ def fetch_json(url):
 
 
 def main(argv):
+    if len(argv) == 2 and argv[0] == "--stats":
+        errs = check_stats(json.load(open(argv[1], encoding="utf-8")))
+        for e in errs:
+            print("::error::" + e)
+        print(f"{argv[1]}: {len(errs)} problems")
+        return 1 if errs else 0
     if not argv or argv[0].startswith("-"):
         print(__doc__.strip())
         return 2

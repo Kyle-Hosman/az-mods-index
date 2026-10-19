@@ -34,6 +34,33 @@ For each repository, a deck fetches
 that file, and of the packages it points to, is documented in the SDK's guide,
 [Packaging and publishing](https://github.com/Kyle-Hosman/az-mods-sdk/blob/main/docs/06-publishing.md).
 
+## `stats.json`
+
+How many times each listed mod's package has been downloaded, for the counts a deck shows in
+Community Mods. A scheduled workflow (`.github/workflows/stats.yml`, every 6 hours) writes it
+with `tools/stats.py`, and commits it only when a number changed.
+
+```json
+{
+  "azmods_stats": 1,
+  "generated": "YYYY-MM-DDTHH:MMZ",
+  "mods": {
+    "https://github.com/someone/az-beat-counter": {"beat-counter": 1840}
+  }
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `azmods_stats` | the format version, always `1` |
+| `generated` | when the counts were last taken, UTC |
+| `mods` | per listed repository, per mod id: the downloads of the mod's package |
+
+A count is GitHub's download count of every release asset named `<id>-<version>.azmod` in that
+repository, over all versions: downloads from decks, the desktop app, or by hand, updates and
+reinstalls included. Icons do not count. A repository that cannot be read keeps its last counts.
+Repositories that are not on this list have no counts.
+
 ## Checks
 
 Every pull request, every push to `main`, and a weekly run check that:
