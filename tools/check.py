@@ -18,6 +18,11 @@ two mods with the same id cannot both be installed, and a deck shows only one of
 id on the community list is therefore unique across all listed repositories (compared
 without regard to case). Two mods with the same display name but different ids are allowed;
 that is a warning, since a DJ tells them apart only by their authors.
+
+    python3 tools/check.py --stats stats.json           the download counts' file
+                                                        (tools/stats.py) within what a
+                                                        deck reads: a deck drops anything
+                                                        outside these limits
 """
 import json
 import re
@@ -27,6 +32,10 @@ import urllib.request
 REPO_RE = re.compile(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9._-]+")
 VERSION_RE = re.compile(r"(0|[1-9]\d{0,3})\.(0|[1-9]\d{0,3})\.(0|[1-9]\d{0,3})")
 MAX_REPOS = 64   # the deck reads the first 64 listed repositories
+ID_RE = re.compile(r"[a-z0-9-]{3,32}")
+STATS_BYTES = 262144   # a deck downloads at most this much of stats.json
+STATS_ROWS = 16384     # and keeps at most this many counts
+STAMP_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}Z")
 
 
 def check_list(d):
@@ -99,6 +108,36 @@ def check_ids(indexes):
     return errs, warns
 
 
+def check_stats(d, size=0):
+    """problems with a stats.json (tools/stats.py) a deck would read"""
+    errs = []
+    if size > STATS_BYTES:
+        errs.append(f"stats.json: {size} bytes, more than the {STATS_BYTES} a deck reads")
+    if not isinstance(d, dict) or d.get("azmods_stats") != 1:
+        return errs + ['stats.json: "azmods_stats" must be 1']
+    if not isinstance(d.get("generated"), str) or not STAMP_RE.fullmatch(d["generated"]):
+        errs.append('stats.json: "generated" must be YYYY-MM-DDTHH:MMZ')
+    mods = d.get("mods")
+    if not isinstance(mods, dict):
+        return errs + ['stats.json: "mods" must be an object']
+    rows = 0
+    for repo, ids in mods.items():
+        if not REPO_RE.fullmatch(repo) or len(repo) > 300:
+            errs.append(f"stats.json: {repo!r} is not a https://github.com/OWNER/REPO address")
+        if not isinstance(ids, dict):
+            errs.append(f"stats.json: {repo}: must map mod ids to counts")
+            continue
+        for i, n in ids.items():
+            rows += 1
+            if not ID_RE.fullmatch(i):
+                errs.append(f"stats.json: {repo}: {i!r} is not a mod id")
+            if not isinstance(n, int) or isinstance(n, bool) or not 0 <= n < 10 ** 13:
+                errs.append(f"stats.json: {repo}: {i}: the count must be a whole number of at most 13 digits")
+    if rows > STATS_ROWS:
+        errs.append(f"stats.json: {rows} counts, more than the {STATS_ROWS} a deck keeps")
+    return errs
+
+
 def raw_index_url(repo):
     return repo.replace("https://github.com/", "https://raw.githubusercontent.com/", 1) + "/HEAD/azmods-repo.json"
 
@@ -109,6 +148,16 @@ def fetch_json(url):
 
 
 def main(argv):
+    if len(argv) == 2 and argv[0] == "--stats":
+        raw = open(argv[1], "rb").read()
+        try:
+            errs = check_stats(json.loads(raw.decode("utf-8")), len(raw))
+        except ValueError as ex:
+            errs = [f"stats.json: not JSON ({ex})"]
+        for e in errs:
+            print("::error::" + e)
+        print(f"stats.json: {len(errs)} problems")
+        return 1 if errs else 0
     if not argv or argv[0].startswith("-"):
         print(__doc__.strip())
         return 2

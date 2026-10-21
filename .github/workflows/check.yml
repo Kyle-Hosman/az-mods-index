@@ -6,6 +6,7 @@
 #   - every package downloads, matches its sha256 and size, and passes azmod-pack
 #     validate (the same checks a deck runs before installing)
 #   - every mod's source URL is publicly reachable
+#   - stats.json, when there is one, follows its schema (tools/check.py --stats)
 name: check
 
 on:
@@ -33,6 +34,9 @@ jobs:
 
       - name: Check the list's schema and every listed repository's versions
         run: python3 tools/check.py azmods-repos.json --fetch
+
+      - name: Check the download counts' schema
+        run: test ! -f stats.json || python3 tools/check.py --stats stats.json
 
       # The full check uses the SDK's azmod-pack, at the SDK release decks are built against.
       - uses: actions/checkout@v4
