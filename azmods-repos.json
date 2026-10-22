@@ -1,6 +1,7 @@
 {
   "azmods_repos": 1,
   "repos": [
-    "https://github.com/Kyle-Hosman/az-mods-examples"
+    "https://github.com/Kyle-Hosman/az-mods-examples",
+    "https://github.com/NachoCasta/nacho-az-mods"
   ]
 }
