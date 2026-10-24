@@ -1,6 +1,6 @@
 {
  "azmods_stats": 1,
- "generated": "2026-10-23T21:40Z",
+ "generated": "2026-10-24T05:01Z",
  "mods": {
   "https://github.com/Kyle-Hosman/az-mods-examples": {
    "deck-overview": 100,
@@ -8,7 +8,8 @@
   },
   "https://github.com/NachoCasta/nacho-az-mods": {
    "hub-libraries": 1,
-   "usb-hub-support": 35
+   "nachocasta-native-usb-names": 2,
+   "usb-hub-support": 37
   }
  }
 }
