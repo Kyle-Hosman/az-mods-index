@@ -1,15 +1,15 @@
 {
  "azmods_stats": 1,
- "generated": "2026-10-27T12:40Z",
+ "generated": "2026-10-27T18:20Z",
  "mods": {
   "https://github.com/Kyle-Hosman/az-mods-examples": {
-   "deck-overview": 116,
-   "set-clock": 116
+   "deck-overview": 117,
+   "set-clock": 117
   },
   "https://github.com/NachoCasta/nacho-az-mods": {
    "hub-libraries": 1,
-   "nachocasta-native-usb-names": 25,
-   "usb-hub-support": 62
+   "nachocasta-native-usb-names": 28,
+   "usb-hub-support": 66
   }
  }
 }
