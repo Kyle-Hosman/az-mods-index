@@ -1,6 +1,6 @@
 # Getting your repository listed
 
-## 1. Before you open a pull request
+## 1. Before you submit
 
 - Your repository is public and publishes at least one mod: an `azmods-repo.json` at
   the root of its default branch, with packages attached to GitHub releases. The SDK's guide,
@@ -21,19 +21,25 @@
   described in the SDK's guide,
   [Testing on your deck](https://github.com/Kyle-Hosman/az-mods-sdk/blob/main/docs/04-testing.md).
 
-## 2. Open the pull request
+## 2. Submit it
 
-Add one line to `repos` in `azmods-repos.json`: your repository URL, exactly
-`https://github.com/OWNER/REPO`. Keep the list sorted, one repository per pull request.
+Post it in **#submit-to-index** on the AZ-MODS Discord (https://discord.gg/SGBxQPK24J), one
+post per repository, filled in like this:
 
-In the pull request description, say:
+```
+Repo URL:
+Mods:
+```
 
-- what each mod does, in a sentence or two
-- which firmware tags you tested on, and on what (deck, views, themes)
-- whether any mod uses hooks, the network, or writes files, and why
+Under **Mods**, one line per mod: its name and what it does.
 
-The checks run automatically. A pull request with failing checks is not reviewed until
-they pass.
+Once it is listed, the post is tagged **In Index**. If something needs fixing, it is tagged
+**Changes Requested** with what to change.
+
+Prefer GitHub? A pull request works too: add one line to `repos` in `azmods-repos.json`, your
+repository URL, exactly `https://github.com/OWNER/REPO`. Keep the list sorted, one repository
+per pull request, and put the same details in its description. The checks run automatically,
+and a pull request with failing checks is not reviewed until they pass.
 
 ## 3. What the review looks at
 
@@ -70,6 +76,7 @@ back with questions or requested changes.
   fixed.
 - A repository can be removed at any time if a mod is found to break the guidelines,
   in particular anything that risks crashing a DJ's set or hides what it does.
-- To remove your own repository, open a pull request that deletes its line.
+- To remove your own repository, say so in your post in #submit-to-index, or open a pull
+  request that deletes its line.
 
 Every mod id must be unique across the whole index (case does not matter); `tools/check.py` tells you if one clashes.

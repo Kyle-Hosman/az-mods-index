@@ -10,7 +10,8 @@ add any other repository on their deck by name; mods from a repository that is n
 this list show a "Not in the community list" note.
 
 To write a mod, start with the [AZ-MODS SDK](https://github.com/Kyle-Hosman/az-mods-sdk).
-To get your repository listed, see [CONTRIBUTING.md](CONTRIBUTING.md).
+To get your repository listed, submit it in #submit-to-index on the AZ-MODS Discord
+(https://discord.gg/SGBxQPK24J). [CONTRIBUTING.md](CONTRIBUTING.md) has the requirements.
 
 ## `azmods-repos.json`
 
