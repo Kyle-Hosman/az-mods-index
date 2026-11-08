@@ -1,6 +1,6 @@
 {
  "azmods_stats": 1,
- "generated": "2026-11-07T22:17Z",
+ "generated": "2026-11-08T06:42Z",
  "mods": {
   "https://github.com/NachoCasta/nacho-az-mods": {
    "hub-libraries": 1,
@@ -11,10 +11,10 @@
    "teof-sound-rec": 64
   },
   "https://github.com/bisser-borisoff/beatfx-tab": {
-   "beatfx-tab": 51
+   "beatfx-tab": 52
   },
   "https://github.com/johnnycoombes/az-mods": {
-   "active-loop": 96,
+   "active-loop": 97,
    "tempo-range": 75
   }
  }
