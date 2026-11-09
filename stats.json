@@ -1,21 +1,21 @@
 {
  "azmods_stats": 1,
- "generated": "2026-11-08T22:28Z",
+ "generated": "2026-11-09T07:10Z",
  "mods": {
   "https://github.com/NachoCasta/nacho-az-mods": {
-   "hub-libraries": 1,
-   "nachocasta-native-usb-names": 83,
-   "usb-hub-support": 122
+   "hub-libraries": 2,
+   "nachocasta-native-usb-names": 85,
+   "usb-hub-support": 137
   },
   "https://github.com/Teo-F/teof-sound-rec": {
-   "teof-sound-rec": 65
+   "teof-sound-rec": 66
   },
   "https://github.com/bisser-borisoff/beatfx-tab": {
-   "beatfx-tab": 56
+   "beatfx-tab": 57
   },
   "https://github.com/johnnycoombes/az-mods": {
-   "active-loop": 99,
-   "tempo-range": 78
+   "active-loop": 100,
+   "tempo-range": 79
   }
  }
 }
