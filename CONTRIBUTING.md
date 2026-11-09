@@ -59,6 +59,11 @@ and a pull request with failing checks is not reviewed until they pass.
    changes, and code patching. No hidden behavior.
 5. **Nothing that is not yours to share.** No firmware files or update files, no keys,
    no decompiled firmware code, no firmware art, in the repository or its releases.
+6. **Free, with every feature.** The mod and everything it does are free for every user:
+   no paid tiers, subscriptions, license keys, paid accounts or paid content, and no
+   feature that works only through a paid service, in the mod or on a server it talks to.
+   A donation link is fine as long as nothing is locked behind it. A mod that charges for
+   any of this is not listed, and a listed mod that starts charging is removed.
 
 Review is done by people, in their spare time. It can take a while, and it can come
 back with questions or requested changes.
