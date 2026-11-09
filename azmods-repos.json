@@ -2,8 +2,10 @@
   "azmods_repos": 1,
   "repos": [
     "https://github.com/bisser-borisoff/beatfx-tab",
+    "https://github.com/christopheb38/mix-pilot",
     "https://github.com/johnnycoombes/az-mods",
     "https://github.com/NachoCasta/nacho-az-mods",
-    "https://github.com/Teo-F/teof-sound-rec"
+    "https://github.com/Teo-F/teof-sound-rec",
+    "https://github.com/twistedmind-afk/Twisted-AZ-Mods"
   ]
 }
