@@ -1,26 +1,26 @@
 {
  "azmods_stats": 1,
- "generated": "2026-11-20T07:44Z",
+ "generated": "2026-11-20T20:43Z",
  "mods": {
   "https://github.com/NachoCasta/nacho-az-mods": {
    "hub-libraries": 2,
    "nachocasta-native-usb-names": 100,
-   "usb-hub-support": 186
+   "usb-hub-support": 187
   },
   "https://github.com/Teo-F/teof-sound-rec": {
    "teof-sound-rec": 91
   },
   "https://github.com/bisser-borisoff/beatfx-tab": {
-   "beatfx-tab": 128,
-   "nudge-indicator": 40
+   "beatfx-tab": 129,
+   "nudge-indicator": 42
   },
   "https://github.com/christopheb38/mix-pilot": {
-   "mix-pilot": 134
+   "mix-pilot": 137
   },
   "https://github.com/johnnycoombes/az-mods": {
    "active-loop": 144,
-   "fader-start": 14,
-   "tempo-range": 137
+   "fader-start": 15,
+   "tempo-range": 139
   },
   "https://github.com/twistedmind-afk/Twisted-AZ-Mods": {
    "4-deck-pro-dj-link": 3,
