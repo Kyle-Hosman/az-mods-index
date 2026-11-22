@@ -1,10 +1,10 @@
 {
  "azmods_stats": 1,
- "generated": "2026-11-22T07:26Z",
+ "generated": "2026-11-22T19:57Z",
  "mods": {
   "https://github.com/NachoCasta/nacho-az-mods": {
    "hub-libraries": 2,
-   "nachocasta-native-usb-names": 103,
+   "nachocasta-native-usb-names": 104,
    "usb-hub-support": 193
   },
   "https://github.com/Teo-F/teof-sound-rec": {
@@ -12,10 +12,10 @@
   },
   "https://github.com/bisser-borisoff/beatfx-tab": {
    "beatfx-tab": 134,
-   "nudge-indicator": 45
+   "nudge-indicator": 46
   },
   "https://github.com/christopheb38/mix-pilot": {
-   "mix-pilot": 142
+   "mix-pilot": 144
   },
   "https://github.com/johnnycoombes/az-mods": {
    "active-loop": 149,
